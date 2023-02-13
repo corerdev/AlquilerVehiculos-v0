@@ -8,6 +8,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import dominio.Turismo;
+
 public class TurismoTest {
 	
 	private static final String MENSAJE_ERROR_MARCA_NULA = "ERROR: La marca no puede ser nula.";
@@ -87,7 +89,7 @@ public class TurismoTest {
 		assertEquals(MENSAJE_ERROR_MATRICULA_NULA, npe.getMessage());
 		IllegalArgumentException iae = assertThrows(IllegalArgumentException.class, () -> new Turismo(MARCA_VALIDA, MODELO_VALIDO, CILINDRADA_VALIDA, "1234bcd"));
 		assertEquals(MENSAJE_ERROR_FORMATO_MATRICULA_NO_VALIDA, iae.getMessage());
-		iae = assertThrows(IllegalArgumentException.class, () -> new Turismo(MARCA_VALIDA, MODELO_VALIDO, CILINDRADA_VALIDA, "1234ABC"));
+		iae = assertThrows(IllegalArgumentException.class, () -> new Turismo(MARCA_VALIDA, MODELO_VALIDO, CILINDRADA_VALIDA, "1234ABCD"));
 		assertEquals(MENSAJE_ERROR_FORMATO_MATRICULA_NO_VALIDA, iae.getMessage());
 		iae = assertThrows(IllegalArgumentException.class, () -> new Turismo(MARCA_VALIDA, MODELO_VALIDO, CILINDRADA_VALIDA, "1234BC"));
 		assertEquals(MENSAJE_ERROR_FORMATO_MATRICULA_NO_VALIDA, iae.getMessage());
@@ -124,7 +126,7 @@ public class TurismoTest {
 		assertEquals(MENSAJE_ERROR_MATRICULA_NULA, npe.getMessage());
 		IllegalArgumentException iae = assertThrows(IllegalArgumentException.class, () -> Turismo.getTurismoConMatricula("1234bcd"));
 		assertEquals(MENSAJE_ERROR_FORMATO_MATRICULA_NO_VALIDA, iae.getMessage());
-		iae = assertThrows(IllegalArgumentException.class, () -> Turismo.getTurismoConMatricula("1234ABC"));
+		iae = assertThrows(IllegalArgumentException.class, () -> Turismo.getTurismoConMatricula("1234ABCD"));
 		assertEquals(MENSAJE_ERROR_FORMATO_MATRICULA_NO_VALIDA, iae.getMessage());
 		iae = assertThrows(IllegalArgumentException.class, () -> Turismo.getTurismoConMatricula("1234BC"));
 		assertEquals(MENSAJE_ERROR_FORMATO_MATRICULA_NO_VALIDA, iae.getMessage());
