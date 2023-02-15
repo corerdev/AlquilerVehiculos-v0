@@ -144,9 +144,10 @@ public class Alquiler {
 	public String toString() {
 		if (this.getFechaDevolucion()==null) {
 			
-			return cliente.getNombre() + " for Cliente, hashCode: " + this.cliente.hashCode() + "<---> " + turismo.getModelo() + ", hashCode: "  + " - Aún no devuelto (0€)";
+			return cliente+" <---> " + turismo + ", " + fechaAlquiler.format(FORMATO_FECHA) + " - Aún no devuelto (" + this.getPrecio() + "€)";
+		} else {
+		return cliente+" <---> " + turismo + ", " + fechaAlquiler.format(FORMATO_FECHA) + " - " + fechaDevolucion.format(FORMATO_FECHA) + " (" + this.getPrecio() + "€)";
 		}
-		return "Alquiler [fechaAlquiler=" + fechaAlquiler + ", cliente=" + cliente + ", turismo=" + turismo + "]";
 	}
 
 }

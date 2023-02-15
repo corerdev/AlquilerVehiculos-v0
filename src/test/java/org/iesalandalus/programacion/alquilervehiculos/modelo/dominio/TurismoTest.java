@@ -89,7 +89,7 @@ public class TurismoTest {
 		assertEquals(MENSAJE_ERROR_MATRICULA_NULA, npe.getMessage());
 		IllegalArgumentException iae = assertThrows(IllegalArgumentException.class, () -> new Turismo(MARCA_VALIDA, MODELO_VALIDO, CILINDRADA_VALIDA, "1234bcd"));
 		assertEquals(MENSAJE_ERROR_FORMATO_MATRICULA_NO_VALIDA, iae.getMessage());
-		iae = assertThrows(IllegalArgumentException.class, () -> new Turismo(MARCA_VALIDA, MODELO_VALIDO, CILINDRADA_VALIDA, "1234ABCD"));
+		iae = assertThrows(IllegalArgumentException.class, () -> new Turismo(MARCA_VALIDA, MODELO_VALIDO, CILINDRADA_VALIDA, "1234ABC"));
 		assertEquals(MENSAJE_ERROR_FORMATO_MATRICULA_NO_VALIDA, iae.getMessage());
 		iae = assertThrows(IllegalArgumentException.class, () -> new Turismo(MARCA_VALIDA, MODELO_VALIDO, CILINDRADA_VALIDA, "1234BC"));
 		assertEquals(MENSAJE_ERROR_FORMATO_MATRICULA_NO_VALIDA, iae.getMessage());
@@ -126,7 +126,7 @@ public class TurismoTest {
 		assertEquals(MENSAJE_ERROR_MATRICULA_NULA, npe.getMessage());
 		IllegalArgumentException iae = assertThrows(IllegalArgumentException.class, () -> Turismo.getTurismoConMatricula("1234bcd"));
 		assertEquals(MENSAJE_ERROR_FORMATO_MATRICULA_NO_VALIDA, iae.getMessage());
-		iae = assertThrows(IllegalArgumentException.class, () -> Turismo.getTurismoConMatricula("1234ABCD"));
+		iae = assertThrows(IllegalArgumentException.class, () -> Turismo.getTurismoConMatricula("1234ABC"));
 		assertEquals(MENSAJE_ERROR_FORMATO_MATRICULA_NO_VALIDA, iae.getMessage());
 		iae = assertThrows(IllegalArgumentException.class, () -> Turismo.getTurismoConMatricula("1234BC"));
 		assertEquals(MENSAJE_ERROR_FORMATO_MATRICULA_NO_VALIDA, iae.getMessage());
