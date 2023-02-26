@@ -1,14 +1,19 @@
 package vista;
 
-import java.time.LocalDate;
+import java.time.LocalDate; 
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 import vista.Opcion;
 
 import org.iesalandalus.programacion.utilidades.Entrada;
 
+import controlador.Controlador;
 import dominio.Alquiler;
 import dominio.Cliente;
 import dominio.Turismo;
+import modelo.Modelo;
+import negocio.Clientes;
 
 public class Consola {
 
@@ -24,6 +29,7 @@ public class Consola {
 		for (int i = 0; i <= longitud; i++) {
 			System.out.print("-");
 		}
+		System.out.println(" ");
 	}
 
 	public static void mostrarMenu() {
@@ -33,7 +39,7 @@ public class Consola {
 		System.out.println("1 - Salir de la aplicación");
 		System.out.println("2 - Insertar un cliente");
 		System.out.println("3 - Insertar un turismo");
-		System.out.println("4 - Insertar un alquiler un alquiler");
+		System.out.println("4 - Insertar un alquiler");
 		System.out.println("5 - Buscar un cliente");
 		System.out.println("6 - Buscar un turismo");
 		System.out.println("7 - Buscar un alquiler");
@@ -97,6 +103,10 @@ public class Consola {
 	}
 
 	public static Cliente leerClienteDni() {
+		
+		//En principio intenté usar este metodo para el leerAlquiler, de forma de pudiera leer solo el cliente del dni
+		// (igual que hice con el turismo y la matricula). Sin embargo, al no tener acceso a ningun metodo de buscar porque
+		// la clase es estatica, me resulta imposible usar solo el dni para nada.
 
 		String dni = leerCadena("Introduzca el dni del cliente.");
 		Cliente clienteDummy = new Cliente("Cliente Dummy", dni, "615000000");
@@ -132,9 +142,8 @@ public class Consola {
 	}
 	
 	public static Alquiler leerAlquiler() {
-		
-		Cliente clienteTemp = leerClienteDni();
-		Turismo turismoTemp = leerTurismoMatricula();
+		Cliente clienteTemp = leerCliente();
+		Turismo turismoTemp = leerTurismo();
 		LocalDate fechaTemp = leerFecha("Introduzca la fecha del alquiler");
 		Alquiler alquilerTemp = new Alquiler(clienteTemp, turismoTemp, fechaTemp);
 		return alquilerTemp;

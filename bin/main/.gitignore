@@ -1,7 +1,4 @@
-/org/
-/uml/
-/modelo/
-/dominio/
-/negocio/
 /controlador/
+/org/
 /vista/
+/dominio/
