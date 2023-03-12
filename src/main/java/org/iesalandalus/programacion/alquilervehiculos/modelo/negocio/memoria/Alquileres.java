@@ -1,4 +1,4 @@
-package negocio;
+package org.iesalandalus.programacion.alquilervehiculos.modelo.negocio.memoria;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -6,11 +6,12 @@ import java.util.List;
 
 import javax.naming.OperationNotSupportedException;
 
-import dominio.Alquiler;
-import dominio.Cliente;
-import dominio.Turismo;
+import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Alquiler;
+import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Cliente;
+import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Vehiculo;
+import org.iesalandalus.programacion.alquilervehiculos.modelo.negocio.IAlquileres;
 
-public class Alquileres {
+public class Alquileres implements IAlquileres {
 
 	List<Alquiler> coleccionAlquileres;
 
@@ -20,6 +21,7 @@ public class Alquileres {
 
 	}
 
+	@Override
 	public List<Alquiler> get() {
 
 		List<Alquiler> coleccionTemp = new ArrayList<Alquiler>();
@@ -33,6 +35,7 @@ public class Alquileres {
 
 	}
 
+	@Override
 	public List<Alquiler> get(Cliente cliente) {
 
 		List<Alquiler> coleccionTemp = new ArrayList<Alquiler>();
@@ -47,12 +50,13 @@ public class Alquileres {
 
 	}
 
-	public List<Alquiler> get(Turismo turismo) {
+	@Override
+	public List<Alquiler> get(Vehiculo vehiculo) {
 
 		List<Alquiler> coleccionTemp = new ArrayList<Alquiler>();
 
 		for (Alquiler alquiler : coleccionAlquileres) {
-			if (alquiler.getTurismo().equals(turismo))
+			if (alquiler.getVehiculo().equals(vehiculo))
 				coleccionTemp.add(alquiler);
 
 		}
@@ -61,20 +65,21 @@ public class Alquileres {
 
 	}
 
+	@Override
 	public int getCantidad() {
 		int cant = coleccionAlquileres.size();
 		return cant;
 	}
 
-	private void comprobarAlquiler(Cliente cliente, Turismo turismo, LocalDate fechaAlquiler)
+	private void comprobarAlquiler(Cliente cliente, Vehiculo vehiculo, LocalDate fechaAlquiler)
 			throws OperationNotSupportedException {
 
 		for (Alquiler alquiler : coleccionAlquileres) {
-			if (alquiler.getTurismo().equals(turismo) && alquiler.getFechaDevolucion() == null) {
+			if (alquiler.getVehiculo().equals(vehiculo) && alquiler.getFechaDevolucion() == null) {
 				throw new OperationNotSupportedException("ERROR: El turismo está actualmente alquilado.");
 			} else if (alquiler.getCliente().equals(cliente) && alquiler.getFechaDevolucion() == null) {
 				throw new OperationNotSupportedException("ERROR: El cliente tiene otro alquiler sin devolver.");
-			} else if (alquiler.getTurismo().equals(turismo) && (alquiler.getFechaDevolucion().isAfter(fechaAlquiler)
+			} else if (alquiler.getVehiculo().equals(vehiculo) && (alquiler.getFechaDevolucion().isAfter(fechaAlquiler)
 					|| alquiler.getFechaDevolucion().equals(fechaAlquiler))) {
 				throw new OperationNotSupportedException("ERROR: El turismo tiene un alquiler posterior.");
 			} else if (alquiler.getCliente().equals(cliente) && (alquiler.getFechaDevolucion().isAfter(fechaAlquiler)
@@ -87,6 +92,7 @@ public class Alquileres {
 
 	}
 
+	@Override
 	public void insertar(Alquiler alquiler) throws OperationNotSupportedException {
 		if (alquiler == null) {
 			throw new NullPointerException("ERROR: No se puede insertar un alquiler nulo.");
@@ -96,12 +102,13 @@ public class Alquileres {
 			 * OperationNotSupportedException("ERROR: Ya existe un turismo con esa matrícula."
 			 * ); }
 			 */ else {
-			comprobarAlquiler(alquiler.getCliente(), alquiler.getTurismo(), alquiler.getFechaAlquiler());
+			comprobarAlquiler(alquiler.getCliente(), alquiler.getVehiculo(), alquiler.getFechaAlquiler());
 			coleccionAlquileres.add(alquiler);
 		}
 
 	}
 
+	@Override
 	public void devolver(Alquiler alquiler, LocalDate fechaDevolucion) throws OperationNotSupportedException {
 		if (alquiler == null) {
 			throw new NullPointerException("ERROR: No se puede devolver un alquiler nulo.");
@@ -120,6 +127,7 @@ public class Alquileres {
 
 	}
 
+	@Override
 	public Alquiler buscar(Alquiler alquiler) {
 
 		if (alquiler == null) {
@@ -128,10 +136,12 @@ public class Alquileres {
 		} else if (!coleccionAlquileres.contains(alquiler)) {
 			return null;
 		} else {
-			return alquiler;
+			int alquilerADevolver = coleccionAlquileres.indexOf(alquiler);
+			return coleccionAlquileres.get(alquilerADevolver);
 		}
 	}
 
+	@Override
 	public void borrar(Alquiler alquiler) throws OperationNotSupportedException {
 
 		if (alquiler == null) {

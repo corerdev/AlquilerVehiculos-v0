@@ -1,18 +1,16 @@
-package vista;
+package org.iesalandalus.programacion.alquilervehiculos.vista.texto;
 
-import javax.management.openmbean.OpenDataException;
-
-public enum Opcion {
-	SALIR("Salir"), INSERTAR_CLIENTE("Insertar cliente"), INSERTAR_TURISMO("Insertar turismo"),
-	INSERTAR_ALQUILER("Insertar alquiler"), BUSCAR_CLIENTE("Buscar cliente"), BUSCAR_TURISMO("Buscar turismo"),
+public enum Accion {
+	SALIR("Salir"), INSERTAR_CLIENTE("Insertar cliente"), INSERTAR_VEHICULO("Insertar vehiculo"),
+	INSERTAR_ALQUILER("Insertar alquiler"), BUSCAR_CLIENTE("Buscar cliente"), BUSCAR_VEHICULO("Buscar vehiculo"),
 	BUSCAR_ALQUILER("Buscar alquiler"), MODIFICAR_CLIENTE("Modificar cliente"), DEVOLVER_ALQUILER("Devolver alquiler"),
-	BORRAR_CLIENTE("Borrar cliente"), BORRAR_TURISMO("Borrar turismo"), BORRAR_ALQUILER("Borrar aqluiler"),
-	LISTAR_CLIENTES("Listar clientes"), LISTAR_TURISMOS("Listar turismos"), LISTAR_ALQUILERES("Listar alquileres"),
-	LISTAR_AQUILERES_CLIENTE("Listar alquileres cliente"), LISTAR_ALQUILERES_TURISMO("Listar alquileres clientes");
+	BORRAR_CLIENTE("Borrar cliente"), BORRAR_VEHICULO("Borrar vehiculo"), BORRAR_ALQUILER("Borrar aqluiler"),
+	LISTAR_CLIENTES("Listar clientes"), LISTAR_VEHICULOS("Listar vehiculos"), LISTAR_ALQUILERES("Listar alquileres"),
+	LISTAR_AQUILERES_CLIENTE("Listar alquileres cliente"), LISTAR_ALQUILERES_VEHICULO("Listar alquileres vehiculo");
 
 	String texto;
 
-	private Opcion(String texto) {
+	private Accion(String texto) {
 
 		this.texto = texto;
 	}
@@ -26,7 +24,7 @@ public enum Opcion {
 		}
 	}
 
-	public static Opcion get(int ordinal) {
+	public static Accion get(int ordinal) {
 
 		if (esOrdinalValido(ordinal)) {
 
@@ -37,13 +35,13 @@ public enum Opcion {
 			case 1:
 				return INSERTAR_CLIENTE;
 			case 2:
-				return INSERTAR_TURISMO;
+				return INSERTAR_VEHICULO;
 			case 3:
 				return INSERTAR_ALQUILER;
 			case 4:
 				return BUSCAR_CLIENTE;
 			case 5:
-				return BUSCAR_TURISMO;
+				return BUSCAR_VEHICULO;
 			case 6:
 				return BUSCAR_ALQUILER;
 			case 7:
@@ -53,19 +51,19 @@ public enum Opcion {
 			case 9:
 				return BORRAR_CLIENTE;
 			case 10:
-				return BORRAR_TURISMO;
+				return BORRAR_VEHICULO;
 			case 11:
 				return BORRAR_ALQUILER;
 			case 12:
 				return LISTAR_CLIENTES;
 			case 13:
-				return LISTAR_TURISMOS;
+				return LISTAR_VEHICULOS;
 			case 14:
 				return LISTAR_ALQUILERES;
 			case 15:
 				return LISTAR_AQUILERES_CLIENTE;
 			case 16:
-				return LISTAR_ALQUILERES_TURISMO;
+				return LISTAR_ALQUILERES_VEHICULO;
 			default:
 				return SALIR;
 

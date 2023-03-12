@@ -14,11 +14,10 @@ import java.util.List;
 
 import javax.naming.OperationNotSupportedException;
 
-import dominio.Alquiler;
-import dominio.Cliente;
-import dominio.Turismo;
-import negocio.Alquileres;
-
+import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Alquiler;
+import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Cliente;
+import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Vehiculo;
+import org.iesalandalus.programacion.alquilervehiculos.modelo.negocio.memoria.Alquileres;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -41,13 +40,13 @@ public class AlquileresTest {
 	private static Alquiler alquiler4;
 	private static Cliente cliente1;
 	private static Cliente cliente2;
-	private static Turismo turismo1;
-	private static Turismo turismo2;
+	private static Vehiculo turismo1;
+	private static Vehiculo turismo2;
 	private static LocalDate hoy;
 	private static LocalDate ayer;
 	private static LocalDate anteayer;
 	private static LocalDate semanaPasada;
-	private Alquileres alquileres;
+	private IAlquileres alquileres;
 
 	@BeforeAll
 	static void setup() {
@@ -70,19 +69,19 @@ public class AlquileresTest {
 		alquileres = new Alquileres();
 		alquiler1 = mock();
 		when(alquiler1.getCliente()).thenReturn(cliente1);
-		when(alquiler1.getTurismo()).thenReturn(turismo1);
+		when(alquiler1.getVehiculo()).thenReturn(turismo1);
 		when(alquiler1.getFechaAlquiler()).thenReturn(semanaPasada);
 		alquiler2 = mock();
 		when(alquiler2.getCliente()).thenReturn(cliente1);
-		when(alquiler2.getTurismo()).thenReturn(turismo2);
+		when(alquiler2.getVehiculo()).thenReturn(turismo2);
 		when(alquiler2.getFechaAlquiler()).thenReturn(ayer);
 		alquiler3 = mock();
 		when(alquiler3.getCliente()).thenReturn(cliente2);
-		when(alquiler3.getTurismo()).thenReturn(turismo2);
+		when(alquiler3.getVehiculo()).thenReturn(turismo2);
 		when(alquiler3.getFechaAlquiler()).thenReturn(ayer);
 		alquiler4 = mock();
 		when(alquiler4.getCliente()).thenReturn(cliente2);
-		when(alquiler4.getTurismo()).thenReturn(turismo1);
+		when(alquiler4.getVehiculo()).thenReturn(turismo1);
 		when(alquiler4.getFechaAlquiler()).thenReturn(ayer);
 	}
 

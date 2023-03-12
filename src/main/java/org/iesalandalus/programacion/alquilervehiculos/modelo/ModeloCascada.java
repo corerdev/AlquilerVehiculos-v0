@@ -1,4 +1,4 @@
-package modelo;
+package org.iesalandalus.programacion.alquilervehiculos.modelo;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -6,38 +6,35 @@ import java.util.List;
 
 import javax.naming.OperationNotSupportedException;
 
-import dominio.Alquiler;
-import dominio.Cliente;
-import dominio.Turismo;
-import negocio.Alquileres;
-import negocio.Clientes;
-import negocio.Turismos;
+import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Alquiler;
+import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Cliente;
+import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Turismo;
+import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Vehiculo;
+import org.iesalandalus.programacion.alquilervehiculos.modelo.negocio.IAlquileres;
+import org.iesalandalus.programacion.alquilervehiculos.modelo.negocio.IClientes;
+import org.iesalandalus.programacion.alquilervehiculos.modelo.negocio.IFuenteDatos;
+import org.iesalandalus.programacion.alquilervehiculos.modelo.negocio.IVehiculos;
+import org.iesalandalus.programacion.alquilervehiculos.modelo.negocio.memoria.Alquileres;
+import org.iesalandalus.programacion.alquilervehiculos.modelo.negocio.memoria.Clientes;
+import org.iesalandalus.programacion.alquilervehiculos.modelo.negocio.memoria.Vehiculos;
 
-public class Modelo {
+public class ModeloCascada extends Modelo {
 
-	private Clientes clientes;
-	private Alquileres alquileres;
-	private Turismos turismos;
-
-	public void comenzar() {
-
-		clientes = new Clientes();
-		alquileres = new Alquileres();
-		turismos = new Turismos();
-
+	
+	public ModeloCascada(IFuenteDatos fuentedatos) {
+		
+		this.setFuenteDatos(fuentedatos);
+		
 	}
 
-	public void terminar() {
-		System.out.println("El modelo ha terminado.");
-	}
 
-	public void insertar(Turismo turismo) throws OperationNotSupportedException {
-		if (turismo==null) {
+	public void insertar(Vehiculo vehiculo) throws OperationNotSupportedException {
+		if (vehiculo==null) {
 			throw new NullPointerException("ERROR: El alquiler a devolver.");
 		}
 
-		Turismo turismoTemp = new Turismo(turismo);
-		this.turismos.insertar(turismoTemp);
+		Vehiculo vehiculoTemp = Vehiculo.copiar(vehiculo);
+		this.vehiculos.insertar(vehiculoTemp);
 	}
 
 	public void insertar(Cliente cliente) throws OperationNotSupportedException {
@@ -54,16 +51,18 @@ public class Modelo {
 			throw new NullPointerException("ERROR: No se puede realizar un alquiler nulo.");
 		}
 		Cliente clienteTemp = clientes.buscar(alquiler.getCliente());
-		Turismo turismoTemp = turismos.buscar(alquiler.getTurismo());
+		//Vehiculo turismoTemp = new Turismo("Dummy", "A", 500, "1111BBB");
+		
+		Vehiculo vehiculoTemp = vehiculos.buscar(alquiler.getVehiculo());
 		//int i = this.clientes.get().indexOf(alquiler.getCliente());
 		//int u = this.turismos.get().indexOf(alquiler.getTurismo());
 		
 		if (clienteTemp == null) {
 			throw new OperationNotSupportedException("ERROR: No existe el cliente del alquiler.");
-		} else if (turismoTemp == null) {
+		} else if (vehiculoTemp == null) {
 			throw new OperationNotSupportedException("ERROR: No existe el turismo del alquiler.");
 		}else {
-			Alquiler alquilerTemp = new Alquiler(clienteTemp, turismoTemp, alquiler.getFechaAlquiler());
+			Alquiler alquilerTemp = new Alquiler(clienteTemp, vehiculoTemp, alquiler.getFechaAlquiler());
 			this.alquileres.insertar(alquilerTemp);
 		} 
 			
@@ -86,8 +85,8 @@ public class Modelo {
 
 	}
 
-	public Turismo buscar(Turismo turismo) {
-		Turismo turismoABuscar = new Turismo(turismos.buscar(turismo));
+	public Vehiculo buscar(Vehiculo vehiculo) {
+		Vehiculo vehiculoABuscar = Vehiculo.copiar(vehiculos.buscar(vehiculo));
 
 		/*
 		 * if (turismoABuscar == null) { throw new
@@ -96,7 +95,7 @@ public class Modelo {
 		 * } else {
 		 */
 
-		return turismoABuscar;
+		return vehiculoABuscar;
 
 	}
 
@@ -150,14 +149,14 @@ public class Modelo {
 
 	}
 
-	public void borrar(Turismo turismo) throws OperationNotSupportedException {
+	public void borrar(Vehiculo vehiculo) throws OperationNotSupportedException {
 
-		for (Alquiler alquiler : this.alquileres.get(turismo)) {
+		for (Alquiler alquiler : this.alquileres.get(vehiculo)) {
 
 			this.alquileres.borrar(alquiler);
 
 		}
-		this.turismos.borrar(turismo);
+		this.vehiculos.borrar(vehiculo);
 
 	}
 
@@ -180,14 +179,14 @@ public class Modelo {
 
 	}
 
-	public List<Turismo> getTurismos() {
+	public List<Vehiculo> getVehiculos() {
 
-		List<Turismo> coleccionTemp = new ArrayList<Turismo>();
-		Turismo turismoTemp;
+		List<Vehiculo> coleccionTemp = new ArrayList<Vehiculo>();
+		Vehiculo vehiculoTemp;
 
-		for (Turismo turismo : turismos.get()) {
-			turismoTemp = new Turismo(turismo);
-			coleccionTemp.add(turismoTemp);
+		for (Vehiculo vehiculo : vehiculos.get()) {
+			vehiculoTemp = Vehiculo.copiar(vehiculo);
+			coleccionTemp.add(vehiculoTemp);
 
 		}
 
@@ -226,12 +225,12 @@ public class Modelo {
 
 	}
 
-	public List<Alquiler> getAlquileres(Turismo turismo) {
+	public List<Alquiler> getAlquileres(Vehiculo vehiculo) {
 
 		List<Alquiler> coleccionTemp = new ArrayList<Alquiler>();
 		Alquiler alquilerTemp = null;
 
-		for (Alquiler alquiler : alquileres.get(turismo)) {
+		for (Alquiler alquiler : alquileres.get(vehiculo)) {
 			alquilerTemp = new Alquiler(alquiler);
 			coleccionTemp.add(alquilerTemp);
 

@@ -1,9 +1,6 @@
 package org.iesalandalus.programacion.alquilervehiculos.modelo.negocio;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import dominio.Cliente;
-import negocio.Clientes;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -16,6 +13,9 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import java.util.List;
 import javax.naming.OperationNotSupportedException;
+
+import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Cliente;
+import org.iesalandalus.programacion.alquilervehiculos.modelo.negocio.memoria.Clientes;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -31,7 +31,7 @@ public class ClientesTest {
 
 	private static Cliente cliente1;
 	private static Cliente cliente2;
-	private Clientes clientes;
+	private IClientes clientes;
 	
 	@BeforeEach
 	void init() {
