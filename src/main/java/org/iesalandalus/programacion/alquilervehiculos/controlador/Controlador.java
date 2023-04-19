@@ -33,7 +33,7 @@ public class Controlador {
 
 	}
 
-	public void comenzar() {
+	public void comenzar() throws OperationNotSupportedException {
 
 		modelo.comenzar();
 		vista.comenzar();
@@ -77,9 +77,14 @@ public class Controlador {
 		modelo.modificar(cliente, nombre, telefono);
 	}
 
-	public void devolver(Alquiler alquiler, LocalDate fechaDevolucion) throws OperationNotSupportedException {
+	public void devolver(Cliente cliente, LocalDate fechaDevolucion) throws OperationNotSupportedException {
 
-		modelo.devolver(alquiler, fechaDevolucion);
+		modelo.devolver(cliente, fechaDevolucion);
+	}
+	
+	public void devolver(Vehiculo vehiculo, LocalDate fechaDevolucion) throws OperationNotSupportedException {
+
+		modelo.devolver(vehiculo, fechaDevolucion);
 	}
 
 	public void borrar(Vehiculo vehiculo) throws OperationNotSupportedException {

@@ -19,6 +19,8 @@ public class Vehiculos implements IVehiculos {
 		coleccionVehiculos = new ArrayList<Vehiculo>();
 
 	}
+	 
+	
 
 	@Override
 	public List<Vehiculo> get() {
@@ -58,7 +60,8 @@ public class Vehiculos implements IVehiculos {
 		if (vehiculo == null) {
 			throw new NullPointerException("ERROR: No se puede buscar un vehiculo nulo.");
 
-		} else if (!coleccionVehiculos.contains(vehiculo)) {
+		}
+		if (!coleccionVehiculos.contains(vehiculo)) {
 			return null;
 		} else {
 			int vehiculoADevolver = coleccionVehiculos.indexOf(vehiculo);

@@ -14,22 +14,20 @@ import org.iesalandalus.programacion.alquilervehiculos.modelo.negocio.IAlquilere
 import org.iesalandalus.programacion.alquilervehiculos.modelo.negocio.IClientes;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.negocio.IFuenteDatos;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.negocio.IVehiculos;
-import org.iesalandalus.programacion.alquilervehiculos.modelo.negocio.memoria.Alquileres;
-import org.iesalandalus.programacion.alquilervehiculos.modelo.negocio.memoria.Clientes;
-import org.iesalandalus.programacion.alquilervehiculos.modelo.negocio.memoria.Vehiculos;
+import org.iesalandalus.programacion.alquilervehiculos.modelo.negocio.ficheros.Alquileres;
+import org.iesalandalus.programacion.alquilervehiculos.modelo.negocio.ficheros.Clientes;
+import org.iesalandalus.programacion.alquilervehiculos.modelo.negocio.ficheros.Vehiculos;
 
 public class ModeloCascada extends Modelo {
 
-	
-	public ModeloCascada(IFuenteDatos fuentedatos) {
-		
-		this.setFuenteDatos(fuentedatos);
-		
+	public ModeloCascada(FactoriaFuenteDatos fuentedatos) {
+
+		super(fuentedatos);
+
 	}
 
-
 	public void insertar(Vehiculo vehiculo) throws OperationNotSupportedException {
-		if (vehiculo==null) {
+		if (vehiculo == null) {
 			throw new NullPointerException("ERROR: El alquiler a devolver.");
 		}
 
@@ -38,7 +36,7 @@ public class ModeloCascada extends Modelo {
 	}
 
 	public void insertar(Cliente cliente) throws OperationNotSupportedException {
-		if (cliente==null) {
+		if (cliente == null) {
 			throw new NullPointerException("ERROR: El alquiler a devolver.");
 		}
 
@@ -47,69 +45,55 @@ public class ModeloCascada extends Modelo {
 	}
 
 	public void insertar(Alquiler alquiler) throws OperationNotSupportedException {
-		if (alquiler==null) {
+		if (alquiler == null) {
 			throw new NullPointerException("ERROR: No se puede realizar un alquiler nulo.");
 		}
 		Cliente clienteTemp = clientes.buscar(alquiler.getCliente());
-		//Vehiculo turismoTemp = new Turismo("Dummy", "A", 500, "1111BBB");
-		
+
 		Vehiculo vehiculoTemp = vehiculos.buscar(alquiler.getVehiculo());
-		//int i = this.clientes.get().indexOf(alquiler.getCliente());
-		//int u = this.turismos.get().indexOf(alquiler.getTurismo());
-		
+
 		if (clienteTemp == null) {
 			throw new OperationNotSupportedException("ERROR: No existe el cliente del alquiler.");
 		} else if (vehiculoTemp == null) {
 			throw new OperationNotSupportedException("ERROR: No existe el turismo del alquiler.");
-		}else {
+		} else {
 			Alquiler alquilerTemp = new Alquiler(clienteTemp, vehiculoTemp, alquiler.getFechaAlquiler());
 			this.alquileres.insertar(alquilerTemp);
-		} 
-			
+		}
 
-		
-		
 	}
 
 	public Cliente buscar(Cliente cliente) {
-		Cliente clienteABuscar = new Cliente(clientes.buscar(cliente));
+		if (clientes.buscar(cliente) == null) {
+			return null;
+		} else {
+			Cliente clienteABuscar = new Cliente(clientes.buscar(cliente));
 
-		/*
-		 * if (clienteABuscar == null) { throw new
-		 * NullPointerException("Error cliente no encontrado");
-		 * 
-		 * } else {
-		 */
-
-		return clienteABuscar;
+			return clienteABuscar;
+		}
 
 	}
 
 	public Vehiculo buscar(Vehiculo vehiculo) {
-		Vehiculo vehiculoABuscar = Vehiculo.copiar(vehiculos.buscar(vehiculo));
 
-		/*
-		 * if (turismoABuscar == null) { throw new
-		 * NullPointerException("Error turismo no encontrado");
-		 * 
-		 * } else {
-		 */
+		if (vehiculos.buscar(vehiculo) == null) {
+			return null;
+		} else {
+			Vehiculo vehiculoABuscar = Vehiculo.copiar(vehiculos.buscar(vehiculo));
 
-		return vehiculoABuscar;
+			return vehiculoABuscar;
+		}
 
 	}
 
 	public Alquiler buscar(Alquiler alquiler) {
-		Alquiler alquilerABuscar = new Alquiler(alquileres.buscar(alquiler));
+		if (alquileres.buscar(alquiler) == null) {
+			return null;
+		} else {
+			Alquiler alquilerABuscar = new Alquiler(alquileres.buscar(alquiler));
 
-		/*
-		 * if (alquilerABuscar == null) { throw new
-		 * NullPointerException("Error turismo no encontrado");
-		 * 
-		 * } else {
-		 */
-
-		return alquilerABuscar;
+			return alquilerABuscar;
+		}
 
 	}
 
@@ -118,23 +102,31 @@ public class ModeloCascada extends Modelo {
 		this.clientes.modificar(cliente, nombre, telefono);
 	}
 
-	public void devolver(Alquiler alquiler, LocalDate fechaDevolucion) throws OperationNotSupportedException {
-		if (alquiler==null) {
+	public void devolver(Cliente cliente, LocalDate fechaDevolucion) throws OperationNotSupportedException {
+		if (cliente == null) {
 			throw new NullPointerException("ERROR: El alquiler a devolver.");
 		}
-		if (fechaDevolucion==null) {
+		if (fechaDevolucion == null) {
 			throw new NullPointerException("Error fechaDevolucion alquiler nulo");
 		}
-		
-		if (this.alquileres.buscar(alquiler)==null) {
-			throw new OperationNotSupportedException("ERROR: No existe el alquiler a devolver.");
-		} else {
-			
-			alquiler.devolver(fechaDevolucion);
 
-		}
+		alquileres.devolver(cliente, fechaDevolucion);
 
 	}
+
+
+	public void devolver(Vehiculo vehiculo, LocalDate fechaDevolucion) throws OperationNotSupportedException {
+		if (vehiculo == null) {
+			throw new NullPointerException("ERROR: El alquiler a devolver.");
+		}
+		if (fechaDevolucion == null) {
+			throw new NullPointerException("Error fechaDevolucion alquiler nulo");
+		}
+
+		alquileres.devolver(vehiculo, fechaDevolucion);
+
+	}
+
 
 	public void borrar(Cliente cliente) throws OperationNotSupportedException {
 

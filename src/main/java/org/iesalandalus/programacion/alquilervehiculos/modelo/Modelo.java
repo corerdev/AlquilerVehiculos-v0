@@ -13,9 +13,9 @@ import org.iesalandalus.programacion.alquilervehiculos.modelo.negocio.IAlquilere
 import org.iesalandalus.programacion.alquilervehiculos.modelo.negocio.IClientes;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.negocio.IFuenteDatos;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.negocio.IVehiculos;
-import org.iesalandalus.programacion.alquilervehiculos.modelo.negocio.memoria.Alquileres;
-import org.iesalandalus.programacion.alquilervehiculos.modelo.negocio.memoria.Clientes;
-import org.iesalandalus.programacion.alquilervehiculos.modelo.negocio.memoria.Vehiculos;
+import org.iesalandalus.programacion.alquilervehiculos.modelo.negocio.ficheros.Alquileres;
+import org.iesalandalus.programacion.alquilervehiculos.modelo.negocio.ficheros.Clientes;
+import org.iesalandalus.programacion.alquilervehiculos.modelo.negocio.ficheros.Vehiculos;
 
 public abstract class Modelo {
 
@@ -23,6 +23,16 @@ public abstract class Modelo {
 	protected IAlquileres alquileres;
 	protected IVehiculos vehiculos;
 	protected IFuenteDatos fuenteDatos;
+
+	protected Modelo(FactoriaFuenteDatos factoriaFuenteDatos) {
+		if (factoriaFuenteDatos == null) {
+			throw new NullPointerException("ERROR: La factoria de fuente de datos no puede ser nula");
+
+		} else {
+
+			fuenteDatos = factoriaFuenteDatos.crear();
+		}
+	}
 
 	protected void setFuenteDatos(IFuenteDatos fuenteDatos) {
 		if (fuenteDatos == null) {
@@ -32,11 +42,12 @@ public abstract class Modelo {
 		}
 	}
 
-	public void comenzar() {
+	public void comenzar() throws OperationNotSupportedException {
 
 		clientes = fuenteDatos.crearClientes();
-		alquileres = fuenteDatos.crearAlquileres();
 		vehiculos = fuenteDatos.crearVehiculos();
+		alquileres = fuenteDatos.crearAlquileres();
+		
 
 	}
 
@@ -48,7 +59,7 @@ public abstract class Modelo {
 
 	public abstract void insertar(Cliente cliente) throws OperationNotSupportedException;
 
-	public abstract void insertar(Alquiler alquiler)  throws OperationNotSupportedException;
+	public abstract void insertar(Alquiler alquiler) throws OperationNotSupportedException;
 
 	public abstract Cliente buscar(Cliente cliente);
 
@@ -56,16 +67,19 @@ public abstract class Modelo {
 
 	public abstract Alquiler buscar(Alquiler alquiler);
 
-	public abstract void modificar(Cliente cliente, String nombre, String telefono) throws OperationNotSupportedException;
+	public abstract void modificar(Cliente cliente, String nombre, String telefono)
+			throws OperationNotSupportedException;
 
-	public abstract void devolver(Alquiler alquiler, LocalDate fechaDevolucion) throws OperationNotSupportedException;
+	public abstract void devolver(Cliente cliente, LocalDate fechaDevolucion) throws OperationNotSupportedException;
+
+	public abstract void devolver(Vehiculo vehiculo, LocalDate fechaDevolucion) throws OperationNotSupportedException;
 
 	public abstract void borrar(Cliente cliente) throws OperationNotSupportedException;
 
 	public abstract void borrar(Vehiculo vehiculo) throws OperationNotSupportedException;
 
 	public abstract void borrar(Alquiler alquiler) throws OperationNotSupportedException;
-	
+
 	public abstract List<Cliente> getClientes();
 
 	public abstract List<Vehiculo> getVehiculos();

@@ -33,7 +33,11 @@ public class Consola {
 
 		System.out.println("Esta es una aplicacion para registrar el alquiler y devolución de vehículos.");
 		System.out.println("Las opciones son:");
-		System.out.println("1 - Salir de la aplicación");
+		for (Accion accion : Accion.values()) {
+			
+			System.out.println(accion.ordinal()+1 +  " - " + accion.toString());
+		}
+		/*System.out.println("1 - Salir de la aplicación");
 		System.out.println("2 - Insertar un cliente");
 		System.out.println("3 - Insertar un vehiculo");
 		System.out.println("4 - Insertar un alquiler");
@@ -49,7 +53,7 @@ public class Consola {
 		System.out.println("14 - Listar los vehiculos");
 		System.out.println("15 - Listar los alquileres");
 		System.out.println("16 - Listar los alquileres de un cliente");
-		System.out.println("17 - Listar los alquileres de un vehiculo");
+		System.out.println("17 - Listar los alquileres de un vehiculo");*/
 
 	}
 
@@ -82,7 +86,7 @@ public class Consola {
 		int opcionInt;
 		do {
 			opcionInt = leerEntero("Introduzca el numero de la opcion que desee.");
-		} while (opcionInt < 1 || opcionInt > 17);
+		} while (opcionInt < 1 || opcionInt > 19);
 		opcionInt = opcionInt - 1;
 
 		Accion opcionTemp = Accion.get(opcionInt);
@@ -127,9 +131,10 @@ public class Consola {
 	private static void mostrarMenuTiposVehiculos() {
 		
 		System.out.println("Los tipos de vehiculo a elegir son los siguientes:");
-		System.out.println("1 - " + TipoVehiculo.TURISMO);
-		System.out.println("2 - " + TipoVehiculo.AUTOBUS);
-		System.out.println("3 - " + TipoVehiculo.FURGONETA);
+		for (TipoVehiculo tipoVehiculo : TipoVehiculo.values()) {
+			System.out.println(tipoVehiculo.ordinal()+1 + "- " + tipoVehiculo.toString());
+			
+		}
 		
 		
 	}
@@ -152,25 +157,19 @@ public class Consola {
 			throw new NullPointerException("ERROR: El tipo de vehiculo no puede ser nulo");
 		}
 		Vehiculo turismoTemp = null;
+		String marca = leerCadena("Introduzca la marca del vehiculo.");
+		String modelo = leerCadena("Introduzca el modelo del vehiculo.");
+		String matricula = leerCadena("Introduzca la matricula del vehiculo.");
 		if (tipoVehiculo == TipoVehiculo.AUTOBUS) {
-			String marca = leerCadena("Introduzca la marca del vehiculo.");
-			String modelo = leerCadena("Introduzca el modelo del vehiculo.");
 			int plazas = leerEntero("Introduzca las plazas del vehiculo.");
-			String matricula = leerCadena("Introduzca la matricula del vehiculo.");
 			turismoTemp = new Autobus(marca, modelo,  plazas, matricula);
 		} else if (tipoVehiculo == TipoVehiculo.FURGONETA) {
-			String marca = leerCadena("Introduzca la marca del vehiculo.");
-			String modelo = leerCadena("Introduzca el modelo del vehiculo.");
 			int pma = leerEntero("Introduzca el pma vehiculo.");
 			int plazas = leerEntero("Introduzca las plazas del vehiculo.");
-			String matricula = leerCadena("Introduzca la matricula del vehiculo.");
 			turismoTemp = new Furgoneta(marca, modelo, pma,  plazas, matricula);
 			
 		} else if (tipoVehiculo == TipoVehiculo.TURISMO) {
-			String marca = leerCadena("Introduzca la marca del vehiculo.");
-			String modelo = leerCadena("Introduzca el modelo del vehiculo.");
 			int cilindrada = leerEntero("Introduzca la cilindrada del vehiculo.");
-			String matricula = leerCadena("Introduzca la matricula del vehiculo.");
 			turismoTemp = new Turismo(marca, modelo, cilindrada, matricula);
 		}
 		
@@ -206,13 +205,43 @@ public class Consola {
 	 * @return
 	 * @throws DateTimeParseException
 	 */
-	private static LocalDate leerMes() throws DateTimeParseException {
+	public static LocalDate leerMes() throws DateTimeParseException {
 		System.out.println("Introduzca un mes del 1 al 12.");
 		int fechaTemp;
 		do {
 			fechaTemp = Entrada.entero();
 		} while (fechaTemp<1 || fechaTemp>12 );
+		
+		switch (fechaTemp) {
+		
+		case 1: 
+			return LocalDate.of(1, 1, 23);
+		case 2: 
+			return LocalDate.of(1, 2, 23);
+		case 3: 
+			return LocalDate.of(1, 3, 23);
+		case 4: 
+			return LocalDate.of(1, 4, 23);
+		case 5: 
+			return LocalDate.of(1, 5, 23);
+		case 6: 
+			return LocalDate.of(1, 6, 23);
+		case 7: 
+			return LocalDate.of(1, 7, 23);
+		case 8: 
+			return LocalDate.of(1, 8, 23);
+		case 9: 
+			return LocalDate.of(1, 9, 23);
+		case 10: 
+			return LocalDate.of(1, 10, 23);
+		case 11: 
+			return LocalDate.of(1, 11, 23);
+		case 12: 
+			return LocalDate.of(1, 12, 23);
+		default:
+			return null;
+			
+		}
 
-		return null;
 	}
 }

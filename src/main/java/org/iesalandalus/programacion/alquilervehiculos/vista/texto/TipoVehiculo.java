@@ -19,7 +19,7 @@ public enum TipoVehiculo {
 
 	private static boolean esOrdinalValido(int ordinal) {
 
-		if (ordinal < 0 || ordinal > 2) {
+		if (ordinal < 0 || ordinal > TipoVehiculo.values().length) {
 			return false;
 		} else {
 			return true;

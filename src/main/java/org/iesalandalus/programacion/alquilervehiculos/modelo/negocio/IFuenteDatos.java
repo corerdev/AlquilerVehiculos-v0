@@ -1,11 +1,13 @@
 package org.iesalandalus.programacion.alquilervehiculos.modelo.negocio;
 
+import javax.naming.OperationNotSupportedException;
+
 public interface IFuenteDatos {
 
-	IClientes crearClientes();
+	IClientes crearClientes() throws OperationNotSupportedException;
 
-	IVehiculos crearVehiculos();
+	IVehiculos crearVehiculos() throws OperationNotSupportedException;
 
-	IAlquileres crearAlquileres();
+	IAlquileres crearAlquileres() throws OperationNotSupportedException;
 
 }

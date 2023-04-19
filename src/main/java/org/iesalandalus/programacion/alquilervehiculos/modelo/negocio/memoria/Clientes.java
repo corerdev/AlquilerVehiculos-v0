@@ -12,12 +12,16 @@ public class Clientes implements IClientes {
 
 	List<Cliente> coleccionClientes;
 
+
 	public Clientes() {
 
 		coleccionClientes = new ArrayList<Cliente>();
 
 	}
 
+
+	
+	
 	@Override
 	public List<Cliente> get() {
 
@@ -56,7 +60,8 @@ public class Clientes implements IClientes {
 		if (cliente == null) {
 			throw new NullPointerException("ERROR: No se puede buscar un cliente nulo.");
 
-		} else if (!coleccionClientes.contains(cliente)) {
+		}
+		if (!coleccionClientes.contains(cliente)) {
 			return null;
 		} else {
 			int clienteADevolver = coleccionClientes.indexOf(cliente);

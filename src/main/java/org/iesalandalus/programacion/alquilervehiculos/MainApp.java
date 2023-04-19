@@ -1,5 +1,7 @@
 package org.iesalandalus.programacion.alquilervehiculos;
 
+import javax.naming.OperationNotSupportedException;
+
 import org.iesalandalus.programacion.alquilervehiculos.controlador.Controlador;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.FactoriaFuenteDatos;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.Modelo;
@@ -13,10 +15,19 @@ public class MainApp {
 		// Ánimo!!!!
 		// Muchas gracias!
 		
-		Modelo modeloApp = new ModeloCascada(FactoriaFuenteDatos.MEMORIA.crear());
+		Modelo modeloApp = new ModeloCascada(FactoriaFuenteDatos.FICHEROS);
 		Vista vistaApp = new VistaTexto();
 		Controlador controladorApp = new Controlador(modeloApp, vistaApp);
-		controladorApp.comenzar();
+		try {
+			controladorApp.comenzar();
+		} catch (OperationNotSupportedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		catch (NullPointerException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

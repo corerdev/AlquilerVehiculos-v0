@@ -5,7 +5,7 @@ import java.util.Objects;
 public abstract class Vehiculo {
 
 	private final String ER_MARCA = "([A-Z][A-Za-z]+)([\s][A-Z][a-z]+)*([-][A-Z][a-z]+)*([A-Z][a-z]+)*";
-	private final String ER_MATRICULA = "([0-9]{4})([BCDFGHHKLMNPRSTVWXZ]{3})";
+	private final String ER_MATRICULA = "([0-9]{4})([BCDFGHJKLMNPRSTVWXZ]{3})";
 	private String marca, modelo, matricula;
 
 	protected Vehiculo(String marca, String modelo, String matricula) {
@@ -64,9 +64,7 @@ public abstract class Vehiculo {
 	}
 
 	public String getMarca() {
-		if (marca == null)
-			throw new NullPointerException("ERROR: El nombre de la marca no puede ser nulo.");
-		else
+		
 			return marca;
 	}
 
@@ -81,9 +79,7 @@ public abstract class Vehiculo {
 	}
 
 	public String getModelo() {
-		if (modelo == null)
-			throw new NullPointerException("ERROR: El modelo de un vehiculo no puede ser nulo.");
-		else
+	
 			return modelo;
 	}
 
@@ -98,9 +94,7 @@ public abstract class Vehiculo {
 	}
 
 	public String getMatricula() {
-		if (matricula == null)
-			throw new NullPointerException("ERROR: El nombre de un cliente no puede ser nulo.");
-		else
+		
 			return matricula;
 	}
 
