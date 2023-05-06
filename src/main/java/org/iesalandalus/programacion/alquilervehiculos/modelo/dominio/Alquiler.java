@@ -28,16 +28,16 @@ public class Alquiler {
 		if (alquiler == null) {
 			throw new NullPointerException("ERROR: No es posible copiar un alquiler nulo.");
 		} else {
-			cliente = new Cliente(alquiler.cliente);
+			this.cliente = new Cliente(alquiler.cliente);
 
 			if (alquiler.getVehiculo() instanceof Turismo) {
-				vehiculo = new Turismo((Turismo) vehiculo);
+				this.vehiculo = new Turismo((Turismo) alquiler.getVehiculo());
 
 			} else if (alquiler.getVehiculo() instanceof Autobus) {
-				vehiculo = new Autobus((Autobus) vehiculo);
+				this.vehiculo = new Autobus((Autobus) alquiler.getVehiculo());
 
 			} else if (alquiler.getVehiculo() instanceof Furgoneta) {
-				vehiculo = new Furgoneta((Furgoneta) vehiculo);
+				this.vehiculo = new Furgoneta((Furgoneta) alquiler.getVehiculo());
 			}
 
 			fechaAlquiler = alquiler.getFechaAlquiler();

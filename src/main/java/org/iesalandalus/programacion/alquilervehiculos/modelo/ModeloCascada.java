@@ -188,7 +188,7 @@ public class ModeloCascada extends Modelo {
 
 	public List<Alquiler> getAlquileres() {
 
-		List<Alquiler> coleccionTemp = new ArrayList<Alquiler>();
+		/*List<Alquiler> coleccionTemp = new ArrayList<Alquiler>();
 		Alquiler alquilerTemp;
 
 		for (Alquiler alquiler : alquileres.get()) {
@@ -197,7 +197,8 @@ public class ModeloCascada extends Modelo {
 
 		}
 
-		return coleccionTemp;
+		return coleccionTemp;*/
+		return alquileres.get();
 
 	}
 

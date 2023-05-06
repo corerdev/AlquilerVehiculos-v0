@@ -11,6 +11,10 @@ public interface IVehiculos {
 	List<Vehiculo> get();
 
 	int getCantidad();
+	
+	void comenzar() throws OperationNotSupportedException;
+
+	void terminar();
 
 	void insertar(Vehiculo vehiculo) throws OperationNotSupportedException;
 

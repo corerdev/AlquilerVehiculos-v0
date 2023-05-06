@@ -72,17 +72,17 @@ public void comenzar() throws OperationNotSupportedException {
 		String tipo = elemento.getAttribute(TIPO);
 		String marca = elemento.getElementsByTagName(MARCA).item(0).getTextContent();
 		String modelo = elemento.getElementsByTagName(MODELO).item(0).getTextContent();
-		if (tipo == "Turismo" ) {
+		if (tipo.equals("Turismo") ) {
 			String cilindrada = elemento.getElementsByTagName(CILINDRADA).item(0).getTextContent();
 			int cilindradaForReal = Integer.parseInt(cilindrada);
 			vehiculo = new Turismo(marca, modelo, cilindradaForReal, matricula);
 		}
-		if (tipo == "Autobus" ) {
+		if (tipo.equals ("Autobus") ) {
 			String plazas = elemento.getElementsByTagName(PLAZAS).item(0).getTextContent();
 			int plazasForReal = Integer.parseInt(plazas);
 			vehiculo = new Autobus(marca, modelo, plazasForReal, matricula);
 		}
-		if (tipo == "Furgoneta" ) {
+		if (tipo.equals("Furgoneta") ) {
 			String plazas = elemento.getElementsByTagName(PLAZAS).item(0).getTextContent();
 			int plazasForReal = Integer.parseInt(plazas);
 			String pma = elemento.getElementsByTagName(PMA).item(0).getTextContent();
@@ -105,7 +105,7 @@ public void comenzar() throws OperationNotSupportedException {
 		
 		for (Vehiculo vehiculo : coleccionVehiculos) {
 			raizCliente.appendChild(vehiculoToElement(vehiculos, vehiculo));
-			UtilidadesXml.domToXml(vehiculos, VEHICULO);
+			UtilidadesXml.domToXml(vehiculos, RUTA_FICHERO);
 		}
 		
 	}
@@ -113,10 +113,10 @@ public void comenzar() throws OperationNotSupportedException {
 		
 		Element vehiculoTemp = dom.createElement(VEHICULO);
 		
-		Attr matricula = dom.createAttribute(MATRICULA);
-		vehiculoTemp.setAttributeNode(matricula);
-		Attr tipo = dom.createAttribute(TIPO);
-		vehiculoTemp.setAttributeNode(tipo);
+
+		vehiculoTemp.setAttribute(MATRICULA, vehiculo.getMatricula());
+	
+		vehiculoTemp.setAttribute(TIPO, vehiculo.getClass().getSimpleName());
 		Element marca = dom.createElement(MARCA);
 		marca.appendChild(dom.createTextNode(vehiculo.getMarca()));
 		vehiculoTemp.appendChild(marca);
@@ -126,7 +126,8 @@ public void comenzar() throws OperationNotSupportedException {
 		if (vehiculo instanceof Turismo) { 
 			Element turismo = dom.createElement(TURISMO);
 			Element cilindrada = dom.createElement(CILINDRADA);
-			cilindrada.appendChild(dom.createTextNode(Integer.toString(((Turismo) turismo).getCilindrada())));
+			String cilindradaElement = Integer.toString(((Turismo) vehiculo).getCilindrada());
+			cilindrada.appendChild(dom.createTextNode(cilindradaElement));
 			vehiculoTemp.appendChild(turismo);
 			turismo.appendChild(cilindrada);
 			
@@ -134,7 +135,7 @@ public void comenzar() throws OperationNotSupportedException {
 		if (vehiculo instanceof Autobus) { 
 			Element autobus = dom.createElement(AUTOBUS);
 			Element plazas = dom.createElement(PLAZAS);
-			plazas.appendChild(dom.createTextNode(Integer.toString(((Autobus) autobus).getPlazas())));
+			plazas.appendChild(dom.createTextNode(Integer.toString(((Autobus) vehiculo).getPlazas())));
 			vehiculoTemp.appendChild(autobus);
 			autobus.appendChild(plazas);
 			
@@ -142,9 +143,9 @@ public void comenzar() throws OperationNotSupportedException {
 		if (vehiculo instanceof Furgoneta) { 
 			Element furgoneta = dom.createElement(FURGONETA);
 			Element plazas = dom.createElement(PLAZAS);
-			plazas.appendChild(dom.createTextNode(Integer.toString(((Furgoneta) furgoneta).getPlazas())));
+			plazas.appendChild(dom.createTextNode(Integer.toString(((Furgoneta) vehiculo).getPlazas())));
 			Element pma = dom.createElement(PLAZAS);
-			pma.appendChild(dom.createTextNode(Integer.toString(((Furgoneta) furgoneta).getPma())));
+			pma.appendChild(dom.createTextNode(Integer.toString(((Furgoneta) vehiculo).getPma())));
 			vehiculoTemp.appendChild(furgoneta);
 			furgoneta.appendChild(plazas);
 			furgoneta.appendChild(pma);

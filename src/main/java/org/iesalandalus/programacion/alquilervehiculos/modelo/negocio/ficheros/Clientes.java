@@ -16,13 +16,13 @@ import org.w3c.dom.NodeList;
 
 public class Clientes implements IClientes {
 
-	private final String RUTA_FICHERO = "..\\AlquilerVehiculos-v1\\Datos\\Clientes.xml";
-	private final String RAIZ = "Clientes";
-	private final String CLIENTE = "Cliente";
-	private final String NOMBRE = "Nombre";
-	private final String DNI = "Dni";
-	private final String TELEFONO = "Telefono";
-	List<Cliente> coleccionClientes;
+	private static final String RUTA_FICHERO = "..\\AlquilerVehiculos-v1\\Datos\\Clientes.xml";
+	private static final String RAIZ = "Clientes";
+	private static final String CLIENTE = "Cliente";
+	private static final String NOMBRE = "Nombre";
+	private static final String DNI = "Dni";
+	private static final String TELEFONO = "Telefono";
+	private List<Cliente> coleccionClientes;
 	private static Clientes instancia;
 
 	private Clientes() throws OperationNotSupportedException {
@@ -80,16 +80,14 @@ public class Clientes implements IClientes {
 		
 		for (Cliente cliente: coleccionClientes) {
 			raizCliente.appendChild(clienteToElement(clientes, cliente));
-			UtilidadesXml.domToXml(clientes, CLIENTE);
+			UtilidadesXml.domToXml(clientes, RUTA_FICHERO);
 		}
 		
 	}
 	private Element clienteToElement(Document dom, Cliente cliente) {
 		
 		Element clienteTemp = dom.createElement(CLIENTE);
-		
-		Attr dniCliente = dom.createAttribute(DNI);
-		clienteTemp.setAttributeNode(dniCliente);
+		clienteTemp.setAttribute(DNI, cliente.getDni());
 		Element nombreCliente = dom.createElement(NOMBRE);
 		nombreCliente.appendChild(dom.createTextNode(cliente.getNombre()));
 		clienteTemp.appendChild(nombreCliente);

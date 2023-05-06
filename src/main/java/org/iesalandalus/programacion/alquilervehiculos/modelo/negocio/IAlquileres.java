@@ -18,6 +18,10 @@ public interface IAlquileres {
 	List<Alquiler> get(Vehiculo vehiculo);
 
 	int getCantidad();
+	
+	void comenzar() throws OperationNotSupportedException;
+
+	void terminar();
 
 	void insertar(Alquiler alquiler) throws OperationNotSupportedException;
 

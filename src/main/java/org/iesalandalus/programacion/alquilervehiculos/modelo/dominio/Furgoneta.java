@@ -2,13 +2,11 @@ package org.iesalandalus.programacion.alquilervehiculos.modelo.dominio;
 
 import java.util.Objects;
 
-public class Furgoneta extends Vehiculo{
-	
-	
+public class Furgoneta extends Vehiculo {
 
 	private final int FACTOR_PLAZAS = 1, FACTOR_PMA = 100;
 	private int plazas, pma;
-	
+
 	public Furgoneta(String marca, String modelo, int plazas, int pma, String matricula) {
 
 		super(marca, modelo, matricula);
@@ -30,65 +28,46 @@ public class Furgoneta extends Vehiculo{
 		setMatricula(furgoneta.getMatricula());
 
 	}
-	
-protected int getFactorPrecio() {
-		
-		int resultado = (this.getPma()/FACTOR_PMA)+(this.getPlazas()*FACTOR_PLAZAS);
+
+	protected int getFactorPrecio() {
+
+		int resultado = (this.getPma() / FACTOR_PMA) + (this.getPlazas() * FACTOR_PLAZAS);
 		return resultado;
 	}
-
 
 	public int getPlazas() {
 		return plazas;
 	}
 
 	public void setPlazas(int plazas) {
-		if (plazas<1) {
+		if (plazas < 1) {
 			throw new IllegalArgumentException("ERROR: El numero de plazas no puede ser inferior a 1");
 		}
 		this.plazas = plazas;
 	}
-	
-	
+
 	public int getPma() {
 		return pma;
 	}
 
 	public void setPma(int pma) {
-		if (pma<1 || pma>1000) {
+		if (pma < 1 || pma > 1000) {
 			throw new IllegalArgumentException("ERROR: El peso no es correcto");
 		}
 		this.pma = pma;
 	}
-
-
-
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + Objects.hash(plazas, pma);
-		return result;
+	return super.hashCode();
 	}
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (!super.equals(obj))
-			return false;
-		if (!(obj instanceof Furgoneta))
-			return false;
-		Furgoneta other = (Furgoneta) obj;
-		return getMatricula() == other.getMatricula();
+		return super.equals(obj);
 	}
-
 	@Override
 	public String toString() {
-		return super.toString() +  " [" + plazas + " asientos]" + pma;
+		return super.toString() + " [" + plazas + " asientos]" + pma;
 	}
-	
-	
-	
 
 }

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Vehiculos>
+    <Vehiculo Matricula="1111BBB" Tipo="Turismo">
+        <Marca>Renault</Marca>
+        <Modelo>Megan</Modelo>
+        <Turismo>
+            <Cilindrada>800</Cilindrada>
+        </Turismo>
+    </Vehiculo>
+    <Vehiculo Matricula="1111CCC" Tipo="Turismo">
+        <Marca>Pepe</Marca>
+        <Modelo>Pepe</Modelo>
+        <Turismo>
+            <Cilindrada>50</Cilindrada>
+        </Turismo>
+    </Vehiculo>
+    <Vehiculo Matricula="1111DDD" Tipo="Autobus">
+        <Marca>Pedro</Marca>
+        <Modelo>Pedro</Modelo>
+        <AUTOBUS>
+            <Plazas>7</Plazas>
+        </AUTOBUS>
+    </Vehiculo>
+</Vehiculos>

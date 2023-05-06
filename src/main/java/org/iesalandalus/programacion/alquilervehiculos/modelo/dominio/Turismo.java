@@ -26,11 +26,10 @@ public class Turismo extends Vehiculo {
 		setMatricula(turismo.getMatricula());
 
 	}
-	
-	
+
 	protected int getFactorPrecio() {
-		
-		int resultado = this.getCilindrada()/FACTOR_CILINDRADA;
+
+		int resultado = this.getCilindrada() / FACTOR_CILINDRADA;
 		return resultado;
 	}
 
@@ -39,39 +38,23 @@ public class Turismo extends Vehiculo {
 	}
 
 	private void setCilindrada(int cilindrada) {
-		if (cilindrada<1 || cilindrada>5000) {
+		if (cilindrada < 1 || cilindrada > 5000) {
 			throw new IllegalArgumentException("ERROR: La cilindrada no es correcta");
 		}
 		this.cilindrada = cilindrada;
 	}
-
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + Objects.hash(cilindrada);
-		return result;
+	return super.hashCode();
 	}
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (!super.equals(obj))
-			return false;
-		if (!(obj instanceof Turismo))
-			return false;
-		Turismo other = (Turismo) obj;
-		return getMatricula() == other.getMatricula();
+		return super.equals(obj);
 	}
-
 	@Override
 	public String toString() {
-		return super.toString() +  " [" + cilindrada + " VC]";
+		return super.toString() + " [" + cilindrada + " VC]";
 	}
-	
-	
-	
-	
 
 }

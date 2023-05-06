@@ -102,4 +102,22 @@ public class Clientes implements IClientes {
 			throw new OperationNotSupportedException("ERROR: No existe ningún cliente con ese DNI.");
 		}
 	}
+
+
+
+
+	@Override
+	public void comenzar() throws OperationNotSupportedException {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+
+	@Override
+	public void terminar() {
+		// TODO Auto-generated method stub
+		
+	}
 }

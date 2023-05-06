@@ -21,6 +21,8 @@ import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Vehiculo;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.negocio.ficheros.Clientes;
 import org.iesalandalus.programacion.alquilervehiculos.vista.Vista;
 
+import javafx.stage.Stage;
+
 public class VistaTexto extends Vista {
 
 	// Controlador controlador;
@@ -492,6 +494,12 @@ public class VistaTexto extends Vista {
 		estadisticas.put(TipoVehiculo.FURGONETA, contadorFragoneta);
 		System.out.println(estadisticas);
 		
+		
+	}
+
+	@Override
+	public void start(Stage arg0) throws Exception {
+		// TODO Auto-generated method stub
 		
 	}
 }

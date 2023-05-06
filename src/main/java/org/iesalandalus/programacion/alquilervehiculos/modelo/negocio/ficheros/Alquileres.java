@@ -29,8 +29,8 @@ public class Alquileres implements IAlquileres {
 	private final String ALQUILER = "Alquiler";
 	private final String DNI_CLIENTE = "Dni";
 	private final String MATRICULA_VEHICULO = "Matricula";
-	private final String FECHA_ALQUILER = "Fecha alquiler";
-	private final String FECHA_DEVOLUCION = "Fecha devolucion";
+	private final String FECHA_ALQUILER = "FechaAlquiler";
+	private final String FECHA_DEVOLUCION = "FechaDevolucion";
 	private final String FORMATO = "Formato";
 
 	private Alquileres() throws OperationNotSupportedException {
@@ -68,10 +68,11 @@ public class Alquileres implements IAlquileres {
 		String matricula = elemento.getAttribute(MATRICULA_VEHICULO);
 		Vehiculo vehiculoDummy = new Turismo("Cosa", "Coso", 500, matricula);
 		Vehiculo vehiculoABuscar = Vehiculos.getInstancia().buscar(vehiculoDummy);
-		String fechaTemp = elemento.getElementsByTagName(FECHA_ALQUILER).item(0).getTextContent();
+		String fechaTemp;
+		fechaTemp = elemento.getElementsByTagName(FECHA_ALQUILER).item(0).getTextContent();
 		LocalDate fechaAlq = LocalDate.parse(fechaTemp, FORMATO_FECHA);
 		Alquiler alquiler = new Alquiler (clienteABuscar, vehiculoABuscar, fechaAlq);
-		if (!(elemento.getElementsByTagName(FECHA_DEVOLUCION).item(0).getTextContent() == null)) {
+		if (!(elemento.getElementsByTagName(FECHA_DEVOLUCION).item(0).getTextContent().isEmpty())) {
 			String fechaDevtTemp = elemento.getElementsByTagName(FECHA_DEVOLUCION).item(0).getTextContent();
 			LocalDate fechaDev = LocalDate.parse(fechaDevtTemp, FORMATO_FECHA);
 			
@@ -92,32 +93,39 @@ public class Alquileres implements IAlquileres {
 		
 		for (Alquiler alquiler: coleccionAlquileres) {
 			raizCliente.appendChild(alquilerToElement(alquileres, alquiler));
-			UtilidadesXml.domToXml(alquileres, ALQUILER);
+			UtilidadesXml.domToXml(alquileres, RUTA_FICHERO);
 		}
 		
 	}
-	private Element alquilerToElement(Document dom, Alquiler alquiler) {
-		
-		Element alquilerTemp = dom.createElement(ALQUILER);
-		
-		Attr dniCliente = dom.createAttribute(DNI_CLIENTE);
-		alquilerTemp.setAttributeNode(dniCliente);
-		Attr matricula = dom.createAttribute(MATRICULA_VEHICULO);
-		alquilerTemp.setAttributeNode(matricula);
-		Element fechaAlquiler = dom.createElement(FECHA_ALQUILER);
-		fechaAlquiler.appendChild(dom.createTextNode(alquiler.getFechaAlquiler().format(FORMATO_FECHA)));
-		alquilerTemp.appendChild(fechaAlquiler);
-		Element fechaDevolucion = dom.createElement(FECHA_DEVOLUCION);
-		fechaDevolucion.appendChild(dom.createTextNode(alquiler.getFechaDevolucion().format(FORMATO_FECHA)));
-		alquilerTemp.appendChild(fechaDevolucion);
-		Attr formato = dom.createAttribute(FORMATO);
-		fechaAlquiler.setAttributeNode(formato);
-		Attr formatoDev = dom.createAttribute(MATRICULA_VEHICULO);
-		alquilerTemp.setAttributeNode(matricula);
-		fechaAlquiler.setAttributeNode(formatoDev);
+	private Element alquilerToElement(Document doc, Alquiler alquiler) {
+        Element eleAlquiler = doc.createElement(ALQUILER);
 
-		return alquilerTemp;
-	}
+
+        eleAlquiler.setAttribute(DNI_CLIENTE, alquiler.getCliente().getDni());
+
+
+        eleAlquiler.setAttribute(MATRICULA_VEHICULO, alquiler.getVehiculo().getMatricula());
+
+        Element eleFecha = doc.createElement(FECHA_ALQUILER);
+        eleFecha.appendChild(doc.createTextNode(alquiler.getFechaAlquiler().format(FORMATO_FECHA)));
+        Attr atriFormato = doc.createAttribute(FORMATO);
+        eleFecha.setAttributeNode(atriFormato);
+        eleAlquiler.appendChild(eleFecha);
+
+        Element eleFechaD = doc.createElement(FECHA_DEVOLUCION);
+        if (alquiler.getFechaDevolucion() == null) {
+            eleFechaD.appendChild(doc.createTextNode(""));
+        }else {
+            eleFechaD.appendChild(doc.createTextNode(alquiler.getFechaDevolucion().format(FORMATO_FECHA)));
+        }
+
+        Attr atriFormatoD = doc.createAttribute(FORMATO);
+        eleFechaD.setAttributeNode(atriFormatoD);
+        eleAlquiler.appendChild(eleFechaD);
+
+        return eleAlquiler;
+
+    }
 
 	static Alquileres getInstancia() throws OperationNotSupportedException {
 		if (instancia == null) {

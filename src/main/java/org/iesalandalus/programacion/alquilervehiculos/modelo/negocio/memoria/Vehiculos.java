@@ -83,5 +83,21 @@ public class Vehiculos implements IVehiculos {
 
 	}
 
+
+
+	@Override
+	public void comenzar() throws OperationNotSupportedException {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public void terminar() {
+		// TODO Auto-generated method stub
+		
+	}
+
 	
 }

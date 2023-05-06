@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Clientes>
+    <Cliente Dni="76633429M">
+        <Nombre>Core</Nombre>
+        <Telefono>111222333</Telefono>
+    </Cliente>
+    <Cliente Dni="43296160V">
+        <Nombre>Pepito</Nombre>
+        <Telefono>444555222</Telefono>
+    </Cliente>
+    <Cliente Dni="11223344B">
+        <Nombre>Coreicuhlo</Nombre>
+        <Telefono>111222333</Telefono>
+    </Cliente>
+</Clientes>

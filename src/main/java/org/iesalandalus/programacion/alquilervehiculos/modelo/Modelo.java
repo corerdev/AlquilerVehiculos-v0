@@ -1,6 +1,6 @@
 package org.iesalandalus.programacion.alquilervehiculos.modelo;
 
-import java.time.LocalDate;
+import java.time.LocalDate; 
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,6 +52,9 @@ public abstract class Modelo {
 	}
 
 	public void terminar() {
+		clientes.terminar();
+		vehiculos.terminar();
+		alquileres.terminar();
 		System.out.println("El modelo ha terminado.");
 	}
 

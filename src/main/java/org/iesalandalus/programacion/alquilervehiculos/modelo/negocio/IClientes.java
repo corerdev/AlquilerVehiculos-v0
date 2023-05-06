@@ -12,6 +12,10 @@ public interface IClientes {
 
 	int getCantidad();
 
+	void comenzar() throws OperationNotSupportedException;
+
+	void terminar();
+
 	void insertar(Cliente cliente) throws OperationNotSupportedException;
 
 	Cliente buscar(Cliente cliente);
