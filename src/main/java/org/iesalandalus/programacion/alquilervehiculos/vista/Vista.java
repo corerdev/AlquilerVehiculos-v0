@@ -7,7 +7,11 @@ import javafx.application.Application;
 
 public abstract class Vista extends Application {
 	
+
+	
 	protected IControlador controlador;
+	
+
 	
 	public void setControlador(IControlador controlador) {
 

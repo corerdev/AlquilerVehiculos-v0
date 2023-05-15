@@ -5,7 +5,7 @@ import java.util.Objects;
 public abstract class Vehiculo {
 
 	private final String ER_MARCA = "([A-Z][A-Za-z]+)([\s][A-Z][a-z]+)*([-][A-Z][a-z]+)*([A-Z][a-z]+)*";
-	private final String ER_MATRICULA = "([0-9]{4})([BCDFGHJKLMNPRSTVWXZ]{3})";
+	private final String ER_MATRICULA = "([0-9]{4})([BCDOFGHJKLMNPRSTVWXZ]{3})";
 	private String marca, modelo, matricula;
 
 	protected Vehiculo(String marca, String modelo, String matricula) {

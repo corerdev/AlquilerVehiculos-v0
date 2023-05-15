@@ -1,24 +1,25 @@
 package org.iesalandalus.programacion.alquilervehiculos.vista.texto;
 
-import java.time.Month;
+import java.time.Month; 
 import java.time.format.DateTimeParseException;
 import java.util.Comparator;
 import java.util.EnumMap;
-import java.util.HashMap;
+
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
+
 
 import javax.naming.OperationNotSupportedException;
 
-import org.iesalandalus.programacion.alquilervehiculos.controlador.Controlador;
+
 import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Alquiler;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Autobus;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Cliente;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Furgoneta;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Turismo;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Vehiculo;
-import org.iesalandalus.programacion.alquilervehiculos.modelo.negocio.ficheros.Clientes;
+
+
 import org.iesalandalus.programacion.alquilervehiculos.vista.Vista;
 
 import javafx.stage.Stage;
@@ -26,6 +27,8 @@ import javafx.stage.Stage;
 public class VistaTexto extends Vista {
 
 	// Controlador controlador;
+
+
 
 	public void comenzar() {
 		Accion opcionTemp = null;

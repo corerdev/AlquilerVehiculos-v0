@@ -9,6 +9,7 @@ import org.iesalandalus.programacion.alquilervehiculos.modelo.Modelo;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.ModeloCascada;
 import org.iesalandalus.programacion.alquilervehiculos.vista.Vista;
 import org.iesalandalus.programacion.alquilervehiculos.vista.grafica.VistaGrafica;
+import org.iesalandalus.programacion.alquilervehiculos.vista.texto.VistaTexto;
 //import org.iesalandalus.programacion.alquilervehiculos.vista.texto.VistaTexto;
 
 public class MainApp {
@@ -17,7 +18,7 @@ public class MainApp {
 		// Ánimo!!!!
 		// Muchas gracias!
 		
-		Modelo modeloApp = new ModeloCascada(FactoriaFuenteDatos.FICHEROS);
+		Modelo modeloApp = new ModeloCascada(FactoriaFuenteDatos.MYSQL);
 		Vista vistaApp = new VistaGrafica();
 		IControlador controladorApp = new Controlador(modeloApp, vistaApp);
 		try {

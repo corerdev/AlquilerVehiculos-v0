@@ -9,13 +9,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class VistaGrafica extends Vista {
+public class VistaGrafica extends Vista{
 
 	private IControlador controladorMVC;
 	private static VistaGrafica instancia = null;
 
 	public VistaGrafica() {
-
+		
 		if (instancia != null) {
 			controladorMVC = instancia.controladorMVC;
 		} else {
